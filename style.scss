@@ -1,5 +1,35 @@
+@function responsiveSize($mobileSize, $desktopSize) {
+  @return calc(
+    #{$mobileSize}px + #{$desktopSize - $mobileSize} * ((100vw - 375px) / 1065)
+  );
+}
+
+@mixin regularPadding($padding) {
+  padding: $padding $padding $padding $padding;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  padding-left: responsiveSize(10, 197);
+  padding-right: responsiveSize(10, 197);
+  padding-top: 70px;
+  background: #333333;
+}
+
+.id {
+  display: flex;
+  flex-wrap: wrap;
+  @include regularPadding(22px);
+  background: white;
+
+  &__photo {
+    width: 311px;
+    height: 311px;
+    border-radius: 12px;
+  }
 }

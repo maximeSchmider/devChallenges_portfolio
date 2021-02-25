@@ -4,4 +4,23 @@
   box-sizing: border-box;
 }
 
+body {
+  padding-left: calc( 10px + 187 * ((100vw - 375px) / 1065) );
+  padding-right: calc( 10px + 187 * ((100vw - 375px) / 1065) );
+  padding-top: 70px;
+  background: #333333;
+}
+
+.id {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 22px 22px 22px 22px;
+  background: white;
+}
+.id__photo {
+  width: 311px;
+  height: 311px;
+  border-radius: 12px;
+}
+
 /*# sourceMappingURL=style.css.map */
