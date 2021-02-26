@@ -13,14 +13,58 @@ body {
 
 .id {
   display: flex;
-  flex-wrap: wrap;
-  padding: 22px 22px 22px 22px;
+  flex-wrap: nowrap;
   background: white;
+  width: calc( 413px + 633 * ((100vw - 375px) / 1065) );
+  align-items: center;
 }
 .id__photo {
   width: 311px;
+  padding: 22px 22px 22px 22px;
   height: 311px;
-  border-radius: 12px;
+  border-radius: 30px;
+}
+.id__gpeTexte {
+  padding: 22px 22px 22px 22px;
+  color: #828282;
+  width: 70%;
+}
+.id__gpeContact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+.id__gpeContact__gpeName {
+  min-width: 50%;
+}
+.id__name {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #4f4f4f;
+}
+.id p {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  padding-bottom: 20px;
+  /* Gray 3 */
+  color: inherit;
+}
+.id__gpeContact__infos {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  /* Gray 2 */
+  color: #4f4f4f;
 }
 
 /*# sourceMappingURL=style.css.map */
