@@ -1,4 +1,22 @@
-@function responsiveSize($mobileSize, $desktopSize) {
+$breakpoints: (
+  "phone-down": 500px,
+  "tablet-up": 768px,
+  "tablet-down": 900px,
+  "desktop-up": 1024px,
+  "desktop-down": 1280px,
+  "widescreen-up": 1440px,
+);
+
+$padding: (
+  "phone-down": 20px,
+  "tablet-up": 35px,
+  "tablet-down": 42px,
+  "desktop-up": 143px,
+  "desktop-down": 180px,
+  "widescreen-up": 196px,
+);
+
+@function changingSize($mobileSize, $desktopSize) {
   @return calc(
     #{$mobileSize}px + #{$desktopSize - $mobileSize} * ((100vw - 375px) / 1065)
   );
@@ -8,17 +26,39 @@
   #{$paddingOrMargin}: $value $value $value $value;
 }
 
+@mixin responsiveSize($key) {
+  @media (min-width: map-get($breakpoints,$key)) {
+    & {
+      @content;
+    }
+  }
+}
+
+%autoResponsive {
+  width: calc(100% - 20px);
+  @each $key, $value in $breakpoints {
+    @include responsiveSize($key) {
+      width: $value - 2 * map-get($padding, $key);
+    }
+  }
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  padding-left: responsiveSize(10, 197);
-  padding-right: responsiveSize(10, 197);
+  /*
+  padding-left: changingSize(10, 197);
+  padding-right: changingSize(10, 197);
   padding-top: 20px;
+*/
+}
+main {
   background: #333333;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 h3 {
@@ -38,7 +78,8 @@ h3 {
 .id {
   display: flex;
   flex-wrap: nowrap;
-  width: responsiveSize(413, 1046);
+  /*width: changingSize(355, 1046);*/
+  @extend %autoResponsive;
   align-items: center;
 
   &__photo {
@@ -113,7 +154,6 @@ h2 {
   color: #4f4f4f;
 }
 .skills {
-  width: 415.02px;
   height: 303px;
   display: flex;
   flex-direction: column;
@@ -181,7 +221,6 @@ h2 {
 /* HOBBIES*/
 
 .hobbies {
-  width: 415px;
   height: 836px;
   @include regularPadding(padding, 22px);
   display: flex;
@@ -197,7 +236,7 @@ h2 {
 
   &__imgContainer {
     border-radius: 12px;
-    width: 379.66px;
+    width: 100%;
     height: 139px;
     overflow: hidden;
     display: flex;
@@ -230,5 +269,79 @@ h2 {
     /* identical to box height */
 
     color: #828282;
+  }
+}
+
+/* Blog*/
+
+.blog {
+  padding-left: 20px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  height: 656px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
+
+    color: #e0e0e0;
+  }
+
+  &__gpeTitre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+
+    &__titre {
+      width: 30%;
+    }
+
+    &__containerImg {
+      width: 60%;
+      height: 321px;
+      overflow: hidden;
+    }
+
+    &__img {
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    width: 83%;
+  }
+}
+
+.brokenDisplay {
+  @extend %autoResponsive;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.leftDisplay {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include responsiveSize("tablet-up") {
+    width: 39%;
+  }
+}
+
+.rightDisplay {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+
+  @include responsiveSize("tablet-up") {
+    width: 57%;
   }
 }
